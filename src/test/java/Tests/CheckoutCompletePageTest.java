@@ -8,7 +8,7 @@ import static org.testng.Assert.assertTrue;
 
 public class CheckoutCompletePageTest extends BaseTest {
 
-    @Test
+    @Test(description = "At the Complete page there is should be confirmation message")
     public void confirmationMessage() {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened");
@@ -19,7 +19,7 @@ public class CheckoutCompletePageTest extends BaseTest {
         assertTrue(completePage.isHeaderTextVisible(), "There is no complete header!");
     }
 
-    @Test
+    @Test(description = "User should be redirect to the Product page after clicking on 'Back to home' button")
     public void redirectionToProductPageFromCompletePage() {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened");

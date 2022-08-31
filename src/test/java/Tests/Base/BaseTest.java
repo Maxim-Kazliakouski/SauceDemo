@@ -6,16 +6,20 @@ import Pages.Checkout.OverviewPage;
 import Pages.Checkout.YourInformationPage;
 import Pages.LoginPage;
 import Pages.ProductPage;
+import Tests.TestListener;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.testng.annotations.*;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+@Listeners(TestListener.class)
 public class BaseTest {
     public WebDriver browser;
     public LoginPage loginPage;
@@ -25,12 +29,20 @@ public class BaseTest {
     public OverviewPage overviewPage;
     public CompletePage completePage;
 
+    @Parameters({"browserType"})
     @BeforeMethod
-    public void setup() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-        ChromeOptions options = new ChromeOptions();
-        options.setHeadless(true);
-        browser = new ChromeDriver(options);
+    public void setup(@Optional("chrome") String browserType) {
+        if (browserType.equals("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.setHeadless(true);
+            browser = new ChromeDriver(options);
+        } else if (browserType.equals("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+            FirefoxOptions options = new FirefoxOptions();
+            options.setHeadless(true);
+            browser = new FirefoxDriver(options);
+        }
         loginPage = new LoginPage(browser);
         productPage = new ProductPage(browser);
         cartPage = new CartPage(browser);
@@ -43,7 +55,9 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
-        browser.quit();
+        if (browser != null) {
+            browser.quit();
+        }
     }
 
     public void login(String USERNAME, String password) {

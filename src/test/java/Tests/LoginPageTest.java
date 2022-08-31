@@ -2,12 +2,20 @@ package Tests;
 
 import Pages.BasePage;
 import Tests.Base.BaseTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class LoginPageTest extends BaseTest {
+    @DataProvider
+    public Object[][] loginData() {
+        return new Object[][]{
+                {"performance_glitch_user", "asdsads", "Epic sadface: Username and password do not match any user in this service"},
+                {"", "secret_sauce", "Epic sadface: Username is required"}
+        };
+    }
 
     @Test
     public void successfulLogin() {
@@ -17,23 +25,13 @@ public class LoginPageTest extends BaseTest {
         assertTrue(productPage.isOpened(), "Product page wasn't opened!");
     }
 
-    @Test
-    public void wrongPassword() {
+    @Test(dataProvider = "loginData")
+    public void negativeLogin(String userName, String password, String error) {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened!");
-        loginPage.login(BasePage.USERNAME, "wrong_password");
+        loginPage.login(userName, password);
         assertEquals(loginPage.getError(),
-                "Epic sadface: Username and password do not match any user in this service",
-                "Wrong error message shown");
-    }
-
-    @Test
-    public void emptyUserName() {
-        loginPage.open();
-        assertTrue(loginPage.isOpened(), "Login page wasn't opened!");
-        loginPage.login("", BasePage.PASSWORD);
-        assertEquals(loginPage.getError(),
-                "Epic sadface: Username is required",
+                error,
                 "Wrong error message shown");
     }
 }

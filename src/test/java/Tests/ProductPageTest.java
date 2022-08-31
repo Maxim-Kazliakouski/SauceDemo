@@ -11,7 +11,7 @@ import static org.testng.Assert.assertTrue;
 
 public class ProductPageTest extends BaseTest {
 
-    @Test
+    @Test(description = "Checking that button 'Add to cart' changes on 'Remove' after clicking on it")
     public void changeAddToCartButtonOnRemove() {
         String testProductName1 = "Sauce Labs Onesie";
         loginPage.open();

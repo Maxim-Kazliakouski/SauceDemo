@@ -10,7 +10,7 @@ import static org.testng.Assert.assertTrue;
 
 public class CheckoutOverviewPageTest extends BaseTest {
 
-    @Test
+    @Test(description = "User should be redirect to the Complete page from Your information page")
     public void successfulRedirectionToCompletePage() {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened");
@@ -24,8 +24,8 @@ public class CheckoutOverviewPageTest extends BaseTest {
         assertTrue(completePage.isOpened(), "The complete page wasn't opened!");
     }
 
-    @Test
-    public void checkItemPriceWhenCartIsEmpty() {
+    @Test(description = "The product price at Overview page should be $0, if user hasn't added anything")
+    public void checkProductPriceWhenCartIsEmpty() {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened");
         loginPage.login(BasePage.USERNAME, BasePage.PASSWORD);
@@ -34,7 +34,7 @@ public class CheckoutOverviewPageTest extends BaseTest {
         assertEquals("$" + overviewPage.getItemPrice(), "$0", "Item price with empty cart is --> " + overviewPage.getItemPrice());
     }
 
-    @Test
+    @Test(description = "The tax at Overview page should be $0.00, if user hasn't added anything")
     public void checkTaxWhenCartIsEmpty() {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened");
@@ -44,7 +44,7 @@ public class CheckoutOverviewPageTest extends BaseTest {
         assertEquals("$" + overviewPage.getTax(), "$0.00", "Tax with empty cart is --> " + overviewPage.getTax());
     }
 
-    @Test
+    @Test(description = "The total price at Overview page should be $0.00, if user hasn't added anything")
     public void checkTotalPriceWhenCartIsEmpty() {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened");
@@ -54,8 +54,8 @@ public class CheckoutOverviewPageTest extends BaseTest {
         assertEquals("$" + overviewPage.getTotalPrice(), "$0.00", "Total price with empty cart is --> " + overviewPage.getTotalPrice());
     }
 
-    @Test
-    public void checkItemPrice() {
+    @Test(description = "Product price at Overview page should be change, if user add some product into the cart")
+    public void checkProductPrice() {
         String testItemName = "Sauce Labs Bike Light";
         String testItemPrice = "$9.99";
         loginPage.open();
@@ -68,7 +68,7 @@ public class CheckoutOverviewPageTest extends BaseTest {
         assertEquals("$" + overviewPage.getItemPrice(), testItemPrice, format("The price of '%s' is differ --> ", testItemName) + overviewPage.getItemPrice());
     }
 
-    @Test
+    @Test(description = "Tax at Overview page should be change, if user add some product into the cart")
     public void checkTax() {
         String testItemName = "Sauce Labs Bolt T-Shirt";
         loginPage.open();
@@ -81,8 +81,8 @@ public class CheckoutOverviewPageTest extends BaseTest {
         assertEquals("$" + overviewPage.getTax(), "$" + overviewPage.calculateTax(), format("The tax of '%s' is differ --> ", testItemName) + "$" + overviewPage.getTax());
     }
 
-    @Test
-    public void checkTotalSum() {
+    @Test(description = "Total price at Overview page should be change, if user add some product into the cart")
+    public void checkTotalPrice() {
         String testItemName = "Sauce Labs Onesie";
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened");

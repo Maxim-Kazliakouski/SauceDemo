@@ -23,7 +23,7 @@ public class ProductPageTest extends BaseTest {
                 "been changed on 'REMOVE' after clicking on it!");
     }
 
-    @Test
+    @Test(description = "Product sorting from A to Z at the Product page")
     public void sortingAToZ() {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened");
@@ -34,7 +34,7 @@ public class ProductPageTest extends BaseTest {
         assertEquals(productPage.getProductsList(), productPage.sortedProductListAToZByJava(), "Sorted product list A-Z at website is differ from test data sorting!\n");
     }
 
-    @Test
+    @Test(description = "Product sorting from Z to A at the Product page")
     public void sortingZToA() {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened");
@@ -45,7 +45,7 @@ public class ProductPageTest extends BaseTest {
         assertEquals(productPage.getProductsList(), sortByJava, "Sorted product list Z-A at website is differ from test data sorting!\n");
     }
 
-    @Test
+    @Test(description = "Product price sorting from Low to High at the Product page")
     public void sortingPriceLoHi() {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened");
@@ -56,7 +56,7 @@ public class ProductPageTest extends BaseTest {
         assertEquals(productPage.getProductPrices(), sortPriceLoHiByJava, "Sorted product list by price Low-High at website is differ from test data sorting!\n");
     }
 
-    @Test
+    @Test(description = "Product price sorting from High to Low at the Product page")
     public void sortingPriceHiLo() {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened");

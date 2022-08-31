@@ -12,7 +12,7 @@ public class CartPageTest extends BaseTest {
     String testProductName1 = "Sauce Labs Onesie";
     String testProductPrice1 = "$7.99";
 
-    @Test
+    @Test(description = "After adding product into the cart, in cart should be exactly that product user has added")
     public void productNameAndPriceInCartShouldBeCorrect() {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened");
@@ -28,7 +28,7 @@ public class CartPageTest extends BaseTest {
         assertEquals(price, testProductPrice1, "The price of added product doesn't match with correct price");
     }
 
-    @Test
+    @Test(description = "After clicking on 'Checkout' button at CartPage, user should redirect to the Checkout page ")
     public void userShouldBeRedirectToCheckoutPage() {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened");
@@ -42,7 +42,7 @@ public class CartPageTest extends BaseTest {
         assertTrue(yourInformationPage.isOpened(), "User hasn't been redirected to the checkout confirmation page");
     }
 
-    @Test
+    @Test(description = "After removing product from the cart, the product should disappear from the purchase list")
     public void removeProductFromCart() {
         String testProductName2 = "Sauce Labs Fleece Jacket";
         loginPage.open();

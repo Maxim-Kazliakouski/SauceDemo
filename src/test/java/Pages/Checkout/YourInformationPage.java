@@ -7,8 +7,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static java.lang.String.format;
-
 public class YourInformationPage extends BasePage {
 
     private final By TITLE_YOUR_INFO = By.xpath("//span[contains(text(),'Checkout: Your Information')]");
@@ -57,10 +55,8 @@ public class YourInformationPage extends BasePage {
         return waitForVisibility(ERROR_MESSAGE);
     }
 
-    public boolean correctErrorMessageText(String missingField) {
-        String errorText = browser.findElement(ERROR_MESSAGE).getText();
-        System.out.println(errorText);
-        return errorText.equals(format("Error: %s is required", missingField));
+    public String getErrorMessage() {
+        return browser.findElement(ERROR_MESSAGE).getText();
     }
 
     public void closeErrorMessage() {

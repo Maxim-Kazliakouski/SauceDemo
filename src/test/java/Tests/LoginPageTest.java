@@ -17,7 +17,7 @@ public class LoginPageTest extends BaseTest {
         };
     }
 
-    @Test
+    @Test(description = "User should be login")
     public void successfulLogin() {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened!");
@@ -25,7 +25,7 @@ public class LoginPageTest extends BaseTest {
         assertTrue(productPage.isOpened(), "Product page wasn't opened!");
     }
 
-    @Test(dataProvider = "loginData")
+    @Test(description = "User shouldn't login when he enters wrong password or password is missed, or username is wrong or missed", dataProvider = "loginData")
     public void negativeLogin(String userName, String password, String error) {
         loginPage.open();
         assertTrue(loginPage.isOpened(), "Login page wasn't opened!");

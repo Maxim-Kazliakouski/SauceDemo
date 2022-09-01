@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,7 +17,6 @@ public abstract class BasePage {
     static final By CART = By.id("shopping_cart_container");
     public static final String USERNAME = "standard_user";
     public static final String PASSWORD = "secret_sauce";
-
 
     public BasePage(WebDriver browser) {
         this.browser = browser;
@@ -39,6 +38,10 @@ public abstract class BasePage {
                 return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete");
             }
         };
+    }
+
+    public void changeExplicitlyWait(int timeOut) {
+        wait = new WebDriverWait(browser, Duration.ofSeconds(timeOut));
     }
 
     public void clickJS(By locator) {

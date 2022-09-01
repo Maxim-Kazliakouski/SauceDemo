@@ -1,6 +1,6 @@
-package Pages.Checkout;
+package pages.checkout;
 
-import Pages.BasePage;
+import pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

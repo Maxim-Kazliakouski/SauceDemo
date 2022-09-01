@@ -1,7 +1,7 @@
-package Tests;
+package tests;
 
-import Pages.BasePage;
-import Tests.Base.BaseTest;
+import pages.BasePage;
+import tests.base.BaseTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -37,7 +37,7 @@ public class CheckoutYourInfoPageTest extends BaseTest {
         assertTrue(yourInformationPage.isOpened(), "User hasn't been redirected to the checkout confirmation page");
         yourInformationPage.fillCheckoutFields(firstName, lastName, zip);
         yourInformationPage.clickContinue();
-        assertTrue(yourInformationPage.errorIsAppeared(), "There is no any error message after " +
+        assertTrue(yourInformationPage.isErrorAppeared(), "There is no any error message after " +
                 "missing required field!");
         assertEquals(yourInformationPage.getErrorMessage(), errorMessage, "Error message text has been changed");
     }
@@ -53,7 +53,7 @@ public class CheckoutYourInfoPageTest extends BaseTest {
         yourInformationPage.clickContinue();
         yourInformationPage.closeErrorMessage();
         yourInformationPage.changeExplicitlyWait(1);
-        assertFalse(yourInformationPage.isElementVisible(), "The error message still visible!");
+        assertFalse(yourInformationPage.isErrorVisible(), "The error message still visible!");
         yourInformationPage.changeExplicitlyWait(10);
     }
 }

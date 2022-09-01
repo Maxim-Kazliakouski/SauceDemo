@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Smoke Test" parallel="tests" thread-count="2">
+    <listeners>
+        <listener class-name="tests.AnnotationTransformer"/>
+        <listener class-name="tests.TestListener"/>
+    </listeners>
+    <test name="Chrome">
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <include name="slow" />-->
+<!--            </run>-->
+<!--        </groups>-->
+        <classes>
+            <class name="tests.CartPageTest" />
+            <class name="tests.CheckoutCompletePageTest" />
+            <class name="tests.CheckoutOverviewPageTest" />
+            <class name="tests.CheckoutYourInfoPageTest" />
+            <class name="tests.ProductPageTest" />
+            <class name="tests.LoginPageTest" />
+            <parameter name="browserType" value="chrome"/>
+            <parameter name="headlessMode" value="true"/>
+        </classes>
+    </test> <!-- Test -->
+    <test name="Firefox">
+        <classes>
+            <class name="tests.CartPageTest"/>
+            <class name="tests.CheckoutCompletePageTest" />
+            <class name="tests.CheckoutOverviewPageTest" />
+            <class name="tests.CheckoutYourInfoPageTest" />
+            <class name="tests.ProductPageTest" />
+            <class name="tests.LoginPageTest" />
+            <parameter name="browserType" value="firefox"/>
+            <parameter name="headlessMode" value="true"/>
+        </classes>
+    </test> <!-- Test -->
+</suite>

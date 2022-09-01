@@ -1,7 +1,7 @@
-package Tests;
+package tests;
 
-import Pages.BasePage;
-import Tests.Base.BaseTest;
+import pages.BasePage;
+import tests.base.BaseTest;
 import org.testng.annotations.Test;
 
 import java.util.List;

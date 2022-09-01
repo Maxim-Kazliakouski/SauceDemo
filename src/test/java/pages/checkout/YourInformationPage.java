@@ -1,11 +1,8 @@
-package Pages.Checkout;
+package pages.checkout;
 
-import Pages.BasePage;
+import pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class YourInformationPage extends BasePage {
 
@@ -14,15 +11,13 @@ public class YourInformationPage extends BasePage {
     private final By X_BUTTON = By.className("error-button");
     private final By ERROR_CONTAINER = By.xpath("//div[@class='error-message-container error']");
     private final By ERROR_MESSAGE = By.xpath("//h3");
-
+    private final By FIRST_NAME = By.id("first-name");
+    private final By LAST_NAME = By.id("last-name");
+    private final By ZIP = By.id("postal-code");
 
     public YourInformationPage(WebDriver browser) {
         super(browser);
     }
-
-    private final By FIRST_NAME = By.id("first-name");
-    private final By LAST_NAME = By.id("last-name");
-    private final By ZIP = By.id("postal-code");
 
     public void open() {
         browser.get(BASE_URL + "checkout-step-one.html");
@@ -32,13 +27,8 @@ public class YourInformationPage extends BasePage {
         return waitForVisibility(TITLE_YOUR_INFO);
     }
 
-    public boolean isElementVisible() {
+    public boolean isErrorVisible() {
         return waitForVisibility(ERROR_CONTAINER);
-    }
-
-    public void changeExplicitlyWait(int timeOut) {
-        wait = new WebDriverWait(browser, Duration.ofSeconds(timeOut));
-
     }
 
     public void fillCheckoutFields(String firstName, String lastName, String zip) {
@@ -51,7 +41,7 @@ public class YourInformationPage extends BasePage {
         browser.findElement(CONTINUE_BUTTON).click();
     }
 
-    public boolean errorIsAppeared() {
+    public boolean isErrorAppeared() {
         return waitForVisibility(ERROR_MESSAGE);
     }
 

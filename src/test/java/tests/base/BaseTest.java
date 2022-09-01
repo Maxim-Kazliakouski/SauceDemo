@@ -1,12 +1,12 @@
-package Tests.Base;
+package tests.base;
 
-import Pages.CartPage;
-import Pages.Checkout.CompletePage;
-import Pages.Checkout.OverviewPage;
-import Pages.Checkout.YourInformationPage;
-import Pages.LoginPage;
-import Pages.ProductPage;
-import Tests.TestListener;
+import pages.CartPage;
+import pages.checkout.CompletePage;
+import pages.checkout.OverviewPage;
+import pages.checkout.YourInformationPage;
+import pages.LoginPage;
+import pages.ProductPage;
+import tests.TestListener;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +16,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.*;
 
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Listeners(TestListener.class)
@@ -29,18 +28,18 @@ public class BaseTest {
     public OverviewPage overviewPage;
     public CompletePage completePage;
 
-    @Parameters({"browserType"})
+    @Parameters({"browserType", "headlessMode"})
     @BeforeMethod
-    public void setup(@Optional("chrome") String browserType) {
+    public void setup(@Optional("chrome") String browserType, @Optional("true") String headlessMode) {
         if (browserType.equals("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-            options.setHeadless(true);
+            options.setHeadless(headlessMode.equals("true"));
             browser = new ChromeDriver(options);
         } else if (browserType.equals("firefox")) {
             WebDriverManager.firefoxdriver().setup();
             FirefoxOptions options = new FirefoxOptions();
-            options.setHeadless(true);
+            options.setHeadless(headlessMode.equals("true"));
             browser = new FirefoxDriver(options);
         }
         loginPage = new LoginPage(browser);
